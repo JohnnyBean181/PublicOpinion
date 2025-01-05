@@ -27,7 +27,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         )
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Combineddata
     template_name = "OpinionReader/detail.html"
 

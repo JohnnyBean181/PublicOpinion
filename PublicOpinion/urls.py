@@ -15,10 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse_lazy
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 将根目录重定向到名为'my_view'的视图
+    path('', lambda _: redirect(reverse_lazy('OpinionReader:index')), name='root_redirect'),
     path("OpinionReader/", include("OpinionReader.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
