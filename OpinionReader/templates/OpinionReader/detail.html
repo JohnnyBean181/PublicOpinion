@@ -1,0 +1,20 @@
+{% if combineddata.title %}
+    <h1>{{ combineddata.title|safe }}</h1>
+{% else %}
+    <h1>微博</h1>
+{% endif %}
+{% load filters %}
+<ul>
+
+    <li>平台 -- {{ combineddata.domain|get_domain_name }} </li>
+    <li>作者 -- {{ combineddata.author_name|safe }} / {{ combineddata.author_id }}</li>
+    <li>日期 -- {{ combineddata.date }} </li>
+    <li>
+        {% if combineddata.domain == 'weibo.com' %}
+            {{ combineddata.text|safe }}
+        {% else %}
+            {{ combineddata.content|safe }}
+        {% endif %}
+    </li>
+
+</ul>

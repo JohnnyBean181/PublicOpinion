@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'OpinionReader/style.css' %}">
+{% load filters %}
+{% if latest_opinion_list %}
+    <table>
+        <tr>
+            <th scope="col">标题</th>
+            <th>标签</th>
+            <th>平台</th>
+            <th>作者</th>
+            <th>日期</th>
+            <th>原链接</th>
+        </tr>
+        {% for opinion in latest_opinion_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'OpinionReader:detail' opinion.id %}">
+                        {% if opinion.domain != 'weibo.com' %}
+                            {{ opinion.title|safe }}
+                        {% else %}
+                            {{ opinion.text|safe|slice:"0:30" }}...
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    {{ opinion.keywords|list_to_string }}
+                </td>
+                <td>
+                    {{ opinion.domain|get_domain_name }}
+                </td>
+                <td>
+                    {{ opinion.author_name|safe }}
+                </td>
+                <td>
+                    {{ opinion.date }}
+                </td>
+                <td>
+                    <a href="{{ opinion.url }}">外网链接</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No opinion is available.</p>
+{% endif %}

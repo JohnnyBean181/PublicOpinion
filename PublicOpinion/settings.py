@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'OpinionReader.apps.OpinionreaderConfig',
+    'OpinionReader.apps.OpinionReaderConfig',
 ]
 
 MIDDLEWARE = [
