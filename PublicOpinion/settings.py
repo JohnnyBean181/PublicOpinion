@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import configparser
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# ConfigParser instance
+config = configparser.ConfigParser()
+config.read('db_mysql.ini')
+
+# param in [database]
+db_host = config.get('database', 'host')
+db_port = config.get('database', 'port')
+db_username = config.get('database', 'username')
+db_password = config.get('database', 'password')
+db_name = config.get('database', 'db_name')
+
+# param in [settings]
+timezone = config.get('settings', 'timezone')
 
 # Application definition
 
@@ -77,10 +90,15 @@ WSGI_APPLICATION = 'PublicOpinion.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': db_name,
+        'USER': db_username,
+        'PASSWORD': db_password,
+        'HOST': db_host,
+        'PORT': db_port,
     }
 }
+
 
 
 # Password validation
@@ -105,9 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = timezone
 
 USE_I18N = True
 
