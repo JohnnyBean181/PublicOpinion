@@ -12,11 +12,11 @@ class Combineddata(models.Model):
     title = models.CharField(db_column='Title', max_length=200, blank=True, null=True)  # Field name made lowercase.
     read_count = models.IntegerField(db_column='ReadCount', blank=True, null=True)  # Field name made lowercase.
     like_count = models.IntegerField(db_column='LikeCount', blank=True, null=True)  # Field name made lowercase.
-    url = models.CharField(db_column='Url', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    url = models.CharField(db_column='Url', max_length=500, blank=True, null=True)  # Field name made lowercase.
     date = models.DateField(db_column='Date')  # Field name made lowercase.
     comment_count = models.IntegerField(db_column='CommentCount', blank=True, null=True)  # Field name made lowercase.
     forward_count = models.IntegerField(db_column='ForwardCount', blank=True, null=True)  # Field name made lowercase.
-    text = models.CharField(db_column='Text', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    text = models.CharField(db_column='Text', max_length=2000, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
